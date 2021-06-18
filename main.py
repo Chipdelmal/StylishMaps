@@ -9,17 +9,18 @@ ox.config(log_console=False, use_cache=True)
 
 # (point, label, fName, bldg, distance) = pts.PAR
 (lat, lon, label, fName, distance) = (
-    argv[1], argv[2], 
-    argv[3], argv[4], argv[5]
+    argv[2], argv[3], argv[4], argv[1], argv[5]
 )
+PATH = '/mnt/Luma/Pictures/Art/Maps/'
 ###############################################################################
 # Constants
 ###############################################################################
-PATH = '/mnt/Luma/Pictures/Art/Maps/'
 DPI = 300
 DST = int(distance)
 point = (float(lat), float(lon))
 bldg = False
+# label = bytes(label, "utf-8").decode("unicode_escape")'latin-1'
+label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
 # Colors
 ###############################################################################
@@ -31,13 +32,13 @@ degs = [[i for i in j] for j in degs]
 ###############################################################################
 bgColor = "#100F0F00"
 bdColor = '#ffffff11'
-(rdColor, rdAlpha, rdScale) = ('#000000', 1, 5)
+(rdColor, rdAlpha, rdScale) = ('#000000', .8, 5)
 ###############################################################################
 # Get Network
 ###############################################################################
 G = ox.graph_from_point(
     point, dist=DST, network_type='all',
-    retain_all=True, simplify=True
+    retain_all=True, simplify=True, truncate_by_edge=True
 )
 if bldg:
     gdf = ox.geometries.geometries_from_point(
@@ -95,14 +96,14 @@ ax.scatter(
     s=7500, linewidth=5
 )
 ax.text(
-    0.5, 0.8, '{}'.format(label), family='Latin Modern Roman Unslanted',
+    0.5, 0.825, '{}'.format(label), family='Latin Modern Roman Unslanted',
     horizontalalignment='center', verticalalignment='center', 
-    transform=ax.transAxes, color='#100F0FDD', fontsize=300
+    transform=ax.transAxes, color='#100F0FDD', fontsize=250
 )
 ax.text(
-    0.5, 0.15, 'N: {}\nW: {}'.format(lat, lon), family='Latin Modern Roman Unslanted',
+    0.5, 0.125, 'N: {}\nW: {}'.format(lat, lon), family='Latin Modern Roman Unslanted',
     horizontalalignment='center', verticalalignment='center', 
-    transform=ax.transAxes, color='#100F0FDD', fontsize=150
+    transform=ax.transAxes, color='#100F0FDD', fontsize=125
 )
 ###############################################################################
 # Export
@@ -113,10 +114,7 @@ fig.savefig(
     dpi=DPI, bbox_inches='tight', format="png", 
     facecolor=fig.get_facecolor(), transparent=True
 )
-plt.clf()
-plt.cla() 
-plt.close(fig)
-plt.gcf()
+plt.clf();plt.cla();plt.close(fig);plt.gcf()
 ###############################################################################
 # Inkscape
 ###############################################################################
