@@ -15,6 +15,7 @@ PATH = '/mnt/Luma/Pictures/Art/Maps/'
 ###############################################################################
 # Constants
 ###############################################################################
+(MARKER, COORDS) = (False, False)
 DPI = 300
 DST = int(distance)
 point = (float(lat), float(lon))
@@ -90,21 +91,24 @@ if bldg:
         gdf, ax=ax,
         color=bdColor, dpi=DPI, save=False, show=False, close=False
     )
-ax.scatter(
-    point[1], point[0], marker="x",
-    zorder=10, color='#100F0FCC',
-    s=7500, linewidth=5
-)
+if MARKER:
+    ax.scatter(
+        point[1], point[0], marker="x",
+        zorder=10, color='#100F0FCC',
+        s=7500, linewidth=5
+    )
 ax.text(
     0.5, 0.825, '{}'.format(label), family='Latin Modern Roman Unslanted',
     horizontalalignment='center', verticalalignment='center', 
     transform=ax.transAxes, color='#100F0FDD', fontsize=250
 )
-ax.text(
-    0.5, 0.125, 'N: {}\nW: {}'.format(lat, lon), family='Latin Modern Roman Unslanted',
-    horizontalalignment='center', verticalalignment='center', 
-    transform=ax.transAxes, color='#100F0FDD', fontsize=125
-)
+if COORDS:
+    ax.text(
+        0.5, 0.125, 'N: {}\nW: {}'.format(lat, lon), 
+        family='Latin Modern Roman Unslanted',
+        horizontalalignment='center', verticalalignment='center', 
+        transform=ax.transAxes, color='#100F0FDD', fontsize=125
+    )
 ###############################################################################
 # Export
 ###############################################################################
