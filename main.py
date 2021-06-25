@@ -7,7 +7,9 @@ import functions as fun
 import matplotlib.pyplot as plt
 ox.config(log_console=False, use_cache=True)
 
-# (point, label, fName, bldg, distance) = pts.PAR
+# (lat, lon, label, fName, distance) = (
+#     "48.86228846291053", "2.2941683745020414", "Tour Eiffel\nParis, FR", "Paris", "15000"
+# )
 (lat, lon, label, fName, distance) = (
     argv[2], argv[3], argv[4], argv[1], argv[5]
 )
@@ -15,7 +17,7 @@ PATH = '/mnt/Luma/Pictures/Art/Maps/'
 ###############################################################################
 # Constants
 ###############################################################################
-(MARKER, COORDS) = (False, False)
+(MARKER, COORDS) = (True, True)
 DPI = 300
 DST = int(distance)
 point = (float(lat), float(lon))
@@ -43,7 +45,7 @@ G = ox.graph_from_point(
 )
 if bldg:
     gdf = ox.geometries.geometries_from_point(
-        point, tags={'building': True} , dist=DST
+        point, tags={'building':True} , dist=DST
     )
 ###############################################################################
 # Process Roads
@@ -58,17 +60,17 @@ for uu, vv, kkey, ddata in G.edges(keys=True, data=True):
 for item in data:
     if "length" in item.keys():
         if item["length"] <= 100:
-            linewidth = 0.1*rdScale
-            color = fun.lighten(rdColor, .65)
+            linewidth = 0.125*rdScale
+            color = fun.lighten(rdColor, .7)
         elif item["length"] > 100 and item["length"] <= 200:
-            linewidth = 0.2*rdScale
-            color = fun.lighten(rdColor, .75)
+            linewidth = 0.225*rdScale
+            color = fun.lighten(rdColor, .775)
         elif item["length"] > 200 and item["length"] <= 400:
             linewidth = 0.3*rdScale
             color = fun.lighten(rdColor, .85)
         elif item["length"] > 400 and item["length"] <= 800:
             linewidth = 0.5*rdScale
-            color = fun.lighten(rdColor, 0.95)
+            color = fun.lighten(rdColor, 0.9)
         else:
             linewidth = 0.6*rdScale
             color = fun.lighten(rdColor, 1.0)
