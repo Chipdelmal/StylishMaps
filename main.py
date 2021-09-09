@@ -21,7 +21,7 @@ point = (float(lat), float(lon))
 ###############################################################################
 (MARKER, COORDS) = (True, True)
 (FONT_FACE, FONT_SIZE, DPI) = ('Savoye LET', 250, 300)
-BLDG = True
+BLDG = False
 # label = bytes(label, "utf-8").decode("unicode_escape")'latin-1'
 label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
@@ -35,7 +35,7 @@ degs = [[i for i in j] for j in degs]
 ###############################################################################
 (bgColor, bdColor) = ('#100F0F22', '#ffffff11')
 if TYPE=='Modern':
-    (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .3500, 4.75, '#ffffff')
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .400, 4.75, '#ffffff')
 else:
     (rdColor, rdAlpha, rdScale, txtColor) = ('#000000', .5, 5, '#100F0FDD')
 ###############################################################################
@@ -104,7 +104,7 @@ ax.text(
 )
 if COORDS:
     ax.text(
-        0.5, 0.125, 'N: {}\nW: {}'.format(latStr, lonStr), family=FONT_FACE,
+        0.5, 0.2, 'N: {}\nW: {}'.format(latStr, lonStr), family=FONT_FACE,
         horizontalalignment='center', verticalalignment='center', 
         transform=ax.transAxes, color=txtColor, fontsize=FONT_SIZE*0.8
     )

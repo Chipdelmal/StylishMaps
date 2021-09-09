@@ -34,6 +34,3 @@ PTH='/Users/sanchez.hmsc/odrive/Mega/Art/Maps/'
 # python main.py "GoldenGate" "37.82269102205399" "-122.47839713291208" "Golden Gate\nSan Francisco, US" "25000" "Old" $PTH
 # python main.py "Firenze" "43.77325343869306" "11.256711217026762" "Santa Maria del Fiore\nFirenze, IT" "10000" "Modern" $PTH
 
-
-python main.py "Yami" "19.46692229722967" "-99.16704285764669" "Yaminkling" "1000" "Modern" $PTH
-python main.py "Yami" "37.882486615226796" "-122.261145297106" "Octochip" "1000" "Modern" $PTH
