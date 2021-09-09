@@ -10,10 +10,11 @@ ox.config(log_console=False, use_cache=True)
 # (lat, lon, label, fName, distance) = (
 #     "48.86228846291053", "2.2941683745020414", "Tour Eiffel\nParis, FR", "Paris", "15000"
 # )
-(lat, lon, label, fName, distance) = (
-    argv[2], argv[3], argv[4], argv[1], argv[5]
+(lat, lon, label, fName, distance, TYPE) = (
+    argv[2], argv[3], argv[4], argv[1], argv[5], argv[6]
 )
-PATH = '/mnt/Luma/Pictures/Art/Maps/'
+# TYPE = 'Modern'
+PATH = path.join('/mnt/Luma/Pictures/Art/Maps', TYPE)
 ###############################################################################
 # Constants
 ###############################################################################
@@ -35,17 +36,21 @@ degs = [[i for i in j] for j in degs]
 ###############################################################################
 bgColor = "#100F0F00"
 bdColor = '#ffffff11'
-(rdColor, rdAlpha, rdScale) = ('#000000', .7, 5)
+if TYPE=='Modern':
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .500, 4.75, '#ffffff')
+else:
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#000000', .675, 5, '#100F0FDD')
 ###############################################################################
 # Get Network
 ###############################################################################
+print("* Processing {}".format(fName), end='\r')
 G = ox.graph_from_point(
     point, dist=DST, network_type='all',
-    retain_all=True, simplify=True, truncate_by_edge=True
+    retain_all=True, simplify=True, truncate_by_edge=False
 )
 if bldg:
     gdf = ox.geometries.geometries_from_point(
-        point, tags={'building':True} , dist=DST
+        point, tags={'building':True} , dist=DSTi
     )
 ###############################################################################
 # Process Roads
@@ -60,10 +65,10 @@ for uu, vv, kkey, ddata in G.edges(keys=True, data=True):
 for item in data:
     if "length" in item.keys():
         if item["length"] <= 100:
-            linewidth = 0.125*rdScale
+            linewidth = 0.15*rdScale
             color = fun.lighten(rdColor, .7)
         elif item["length"] > 100 and item["length"] <= 200:
-            linewidth = 0.225*rdScale
+            linewidth = 0.25*rdScale
             color = fun.lighten(rdColor, .775)
         elif item["length"] > 200 and item["length"] <= 400:
             linewidth = 0.3*rdScale
@@ -96,20 +101,20 @@ if bldg:
 if MARKER:
     ax.scatter(
         point[1], point[0], marker="x",
-        zorder=10, color='#100F0FCC',
+        zorder=10, color=txtColor,
         s=7500, linewidth=5
     )
 ax.text(
     0.5, 0.825, '{}'.format(label), family='Latin Modern Roman Unslanted',
     horizontalalignment='center', verticalalignment='center', 
-    transform=ax.transAxes, color='#100F0FDD', fontsize=250
+    transform=ax.transAxes, color=txtColor, fontsize=250
 )
 if COORDS:
     ax.text(
         0.5, 0.125, 'N: {}\nW: {}'.format(lat, lon), 
         family='Latin Modern Roman Unslanted',
         horizontalalignment='center', verticalalignment='center', 
-        transform=ax.transAxes, color='#100F0FDD', fontsize=125
+        transform=ax.transAxes, color=txtColor, fontsize=125
     )
 ###############################################################################
 # Export
@@ -136,6 +141,7 @@ cmd = [
     'inkscape', 
     '--export-type=png', 
     '--export-dpi='+str(DPI), 
+    '--export-area-page',
     path.join(PATH, 'PANEL.svg'), 
     '--export-filename='+path.join(PATH, 'MAP_'+fName+'.png')
 ]
@@ -148,3 +154,4 @@ fin.close()
 fin = open(path.join(PATH, 'PANEL.svg'), "wt")
 fin.write(data)
 fin.close()
+print(" "*80, end='\r')
