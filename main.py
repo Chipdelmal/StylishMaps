@@ -10,20 +10,18 @@ ox.config(log_console=False, use_cache=True)
 # (lat, lon, label, fName, distance) = (
 #     "48.86228846291053", "2.2941683745020414", "Tour Eiffel\nParis, FR", "Paris", "15000"
 # )
-(lat, lon, label, fName, distance, PATH, TYPE) = (
+(lat, lon, label, fName, distance, TYPE, PATH) = (
     argv[2], argv[3], argv[4], argv[1], argv[5], argv[6], argv[7]
 )
-# TYPE = 'Modern'
-PATH = path.join('/mnt/Luma/Pictures/Art/Maps', TYPE)
-# PATH = '/mnt/Luma/Pictures/Art/Maps/'
+PATH = path.join(PATH, TYPE)
+DST = int(distance)
+point = (float(lat), float(lon))
 ###############################################################################
 # Constants
 ###############################################################################
 (MARKER, COORDS) = (True, True)
-DPI = 300
-DST = int(distance)
-point = (float(lat), float(lon))
-bldg = True
+(FONT_FACE, FONT_SIZE, DPI) = ('Savoye LET', 250, 300)
+BLDG = True
 # label = bytes(label, "utf-8").decode("unicode_escape")'latin-1'
 label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
@@ -31,16 +29,15 @@ label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
 degs = [fun.decdeg2dms(i) for i in point]
 degs = [[i for i in j] for j in degs]
-(lat, lon) = ["{:.0f}° {:.0f}' {:.2f}".format(*i) for i in degs]
+(latStr, lonStr) = ["{:.0f}° {:.0f}' {:.2f}".format(*i) for i in degs]
 ###############################################################################
 # Colors
 ###############################################################################
-bgColor = "#100F0F00"
-bdColor = '#ffffff11'
+(bgColor, bdColor) = ('#100F0F22', '#ffffff11')
 if TYPE=='Modern':
-    (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .500, 4.75, '#ffffff')
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .3500, 4.75, '#ffffff')
 else:
-    (rdColor, rdAlpha, rdScale, txtColor) = ('#000000', .675, 5, '#100F0FDD')
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#000000', .5, 5, '#100F0FDD')
 ###############################################################################
 # Get Network
 ###############################################################################
@@ -49,9 +46,9 @@ G = ox.graph_from_point(
     point, dist=DST, network_type='all',
     retain_all=True, simplify=True, truncate_by_edge=False
 )
-if bldg:
+if BLDG:
     gdf = ox.geometries.geometries_from_point(
-        point, tags={'building':True} , dist=DSTi
+        point, tags={'building':True} , dist=DST
     )
 ###############################################################################
 # Process Roads
@@ -89,7 +86,7 @@ for item in data:
     save=False, edge_color=roadColors, edge_alpha=rdAlpha,
     edge_linewidth=roadWidths, show=False
 )
-if bldg:
+if BLDG:
     (fig, ax) = ox.plot_footprints(
         gdf, ax=ax,
         color=bdColor, dpi=DPI, save=False, show=False, close=False
@@ -101,16 +98,15 @@ if MARKER:
         s=7500, linewidth=5
     )
 ax.text(
-    0.5, 0.825, '{}'.format(label), family='Latin Modern Roman Unslanted',
+    0.5, 0.825, '{}'.format(label), family=FONT_FACE,
     horizontalalignment='center', verticalalignment='center', 
-    transform=ax.transAxes, color='#100F0FDD', fontsize=200
+    transform=ax.transAxes, color=txtColor, fontsize=FONT_SIZE
 )
 if COORDS:
     ax.text(
-        0.5, 0.125, 'N: {}\nW: {}'.format(lat, lon), 
-        family='Latin Modern Roman Unslanted',
+        0.5, 0.125, 'N: {}\nW: {}'.format(latStr, lonStr), family=FONT_FACE,
         horizontalalignment='center', verticalalignment='center', 
-        transform=ax.transAxes, color=txtColor, fontsize=125
+        transform=ax.transAxes, color=txtColor, fontsize=FONT_SIZE*0.8
     )
 ###############################################################################
 # Export
@@ -121,7 +117,7 @@ fig.savefig(
     dpi=DPI, bbox_inches='tight', format="png", 
     facecolor=fig.get_facecolor(), transparent=True
 )
-plt.clf();plt.cla();plt.close(fig);plt.gcf()
+plt.clf();plt.cla();plt.close(fig);plt.gcf();
 ###############################################################################
 # Inkscape
 ###############################################################################
