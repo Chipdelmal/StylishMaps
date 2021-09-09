@@ -21,7 +21,7 @@ ox.config(log_console=False, use_cache=True)
 DPI = 300
 DST = int(distance)
 point = (float(lat), float(lon))
-bldg = False
+bldg = True
 # label = bytes(label, "utf-8").decode("unicode_escape")'latin-1'
 label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
@@ -34,7 +34,7 @@ degs = [[i for i in j] for j in degs]
 # Colors
 ###############################################################################
 bgColor = "#100F0F00"
-bdColor = '#ffffff11'
+bdColor = '#bdb2ff66'
 (rdColor, rdAlpha, rdScale) = ('#000000', .7, 5)
 ###############################################################################
 # Get Network
@@ -45,17 +45,12 @@ G = ox.graph_from_point(
 )
 if bldg:
     gdf = ox.geometries.geometries_from_point(
-        point, tags={'building':True} , dist=DST
+        point, tags={'building': True} , dist=DST
     )
 ###############################################################################
 # Process Roads
 ###############################################################################
-(u, v, key, data) = ([], [], [], [])
-for uu, vv, kkey, ddata in G.edges(keys=True, data=True):
-    u.append(uu)
-    v.append(vv)
-    key.append(kkey)
-    data.append(ddata)    
+data = [i[-1] for i in G.edges(keys=True, data=True)]
 (roadColors, roadWidths) = ([], [])
 for item in data:
     if "length" in item.keys():
