@@ -10,11 +10,11 @@ ox.config(log_console=False, use_cache=True)
 # (lat, lon, label, fName, distance) = (
 #     "48.86228846291053", "2.2941683745020414", "Tour Eiffel\nParis, FR", "Paris", "15000"
 # )
-(lat, lon, label, fName, distance, PATH, TYPE) = (
+(lat, lon, label, fName, distance, TYPE, PATH) = (
     argv[2], argv[3], argv[4], argv[1], argv[5], argv[6], argv[7]
 )
 # TYPE = 'Modern'
-PATH = path.join('/mnt/Luma/Pictures/Art/Maps', TYPE)
+PATH = path.join(c, TYPE)
 # PATH = '/mnt/Luma/Pictures/Art/Maps/'
 ###############################################################################
 # Constants
