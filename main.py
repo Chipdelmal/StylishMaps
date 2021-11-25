@@ -18,6 +18,7 @@ ox.config(log_console=False, use_cache=True)
 PATH = path.join(PATH, TYPE)
 DST = int(distance)
 point = (float(lat), float(lon))
+INKSCAPE = False
 ###############################################################################
 # Constants
 ###############################################################################
@@ -126,29 +127,30 @@ plt.clf();plt.cla();plt.close(fig);plt.gcf();
 ###############################################################################
 # Inkscape
 ###############################################################################
-fin = open(path.join(PATH, 'PANEL.svg'), "rt")
-data = fin.read()
-data = data.replace('MAP_IMG', fName)
-fin.close()
-fin = open(path.join(PATH, 'PANEL.svg'), "wt")
-fin.write(data)
-fin.close()
-# Export composite image ------------------------------------------------------
-cmd = [
-    'inkscape', 
-    '--export-type=png', 
-    '--export-dpi='+str(DPI), 
-    '--export-area-page',
-    path.join(PATH, 'PANEL.svg'), 
-    '--export-filename='+path.join(PATH, 'MAP_'+fName+'.png')
-]
-subprocess.call(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-# Return svg to original state ------------------------------------------------
-fin = open(path.join(PATH, 'PANEL.svg'), "rt")
-data = fin.read()
-data = data.replace(fName,'MAP_IMG')
-fin.close()
-fin = open(path.join(PATH, 'PANEL.svg'), "wt")
-fin.write(data)
-fin.close()
-print(" "*80, end='\r')
+if INKSCAPE:
+    fin = open(path.join(PATH, 'PANEL.svg'), "rt")
+    data = fin.read()
+    data = data.replace('MAP_IMG', fName)
+    fin.close()
+    fin = open(path.join(PATH, 'PANEL.svg'), "wt")
+    fin.write(data)
+    fin.close()
+    # Export composite image ------------------------------------------------------
+    cmd = [
+        'inkscape', 
+        '--export-type=png', 
+        '--export-dpi='+str(DPI), 
+        '--export-area-page',
+        path.join(PATH, 'PANEL.svg'), 
+        '--export-filename='+path.join(PATH, 'MAP_'+fName+'.png')
+    ]
+    subprocess.call(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    # Return svg to original state ------------------------------------------------
+    fin = open(path.join(PATH, 'PANEL.svg'), "rt")
+    data = fin.read()
+    data = data.replace(fName,'MAP_IMG')
+    fin.close()
+    fin = open(path.join(PATH, 'PANEL.svg'), "wt")
+    fin.write(data)
+    fin.close()
+    print(" "*80, end='\r')

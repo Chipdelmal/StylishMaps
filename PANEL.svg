@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="250mm"
+   height="250mm"
+   viewBox="0 0 250 250"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="PANEL.svg"
+   inkscape:export-filename="/home/chipdelmal/Documents/OneWheel/maps/textured.png"
+   inkscape:export-xdpi="250"
+   inkscape:export-ydpi="250"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.78374771"
+     inkscape:cx="255.82212"
+     inkscape:cy="483.57398"
+     inkscape:window-width="1920"
+     inkscape:window-height="1026"
+     inkscape:window-x="0"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="BG"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(105.40121,-5.0538583)"
+     style="display:inline">
+    <image
+       width="250"
+       height="250"
+       preserveAspectRatio="none"
+       xlink:href="TEXTURE_BLUE3.jpg"
+       id="image17"
+       x="-144.59879"
+       y="-255.05386"
+       transform="scale(-1)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="MAP_IMG"
+     style="display:inline;mix-blend-mode:normal"
+     transform="translate(1.5699509,0.75244286)">
+    <image
+       width="275"
+       height="275"
+       preserveAspectRatio="none"
+       xlink:href="MAP_IMG.png"
+       id="image191"
+       x="-14.069951"
+       y="-13.252443"
+       style="opacity:0.8" />
+  </g>
+</svg>

@@ -33,8 +33,4 @@ PTH='/mnt/Luma/Pictures/Art/Maps'
 # python main.py "Budapest" "47.48807080946765" "19.05841777661642" "Nagy Vásárcsarnok\nBudapest, HU" "15000"
 # python main.py "Belvedere" "48.192824269178004" "16.38504366701092" "Schloss Belvedere\nWien, AT" "15000"
 # python main.py "GoldenGate" "37.82269102205399" "-122.47839713291208" "Golden Gate\nSan Francisco, US" "25000" "Modern" $PTH
-# python main.py "Firenze" "43.77325343869306" "11.256711217026762" "Santa Maria del Fiore\nFirenze, IT" "10000" "Modern" $PTH
-
-
-python main.py "Yami" "19.46692229722967" "-99.16704285764669" "CDMX\nYaminkling" "10000" "Modern" $PTH
-python main.py "Chip" "37.88238499954386" "-122.2620787058343" "Berkeley, California\nOctochip" "10000" "Modern" $PTH
+python main.py "Firenze" "43.77325343869306" "11.256711217026762" "Santa Maria del Fiore\nFirenze, IT" "10000" "Modern" $PTH
