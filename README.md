@@ -12,7 +12,7 @@ For example:
 
 exports:
 
-![](https://chipdelmal.github.io/media/map/MAP_Belvedere.png)
+![](./MAP_Belvedere.jpg)
 
 
 Please note that it'll export the street traces with a transparent background for further use with software like [inkscape](https://inkscape.org/). Code to automate the process is provided but needs some panel setup (see my [blogpost](https://chipdelmal.github.io/artsci/2021-11-15-ArtsyMaps.html) for more information). 
