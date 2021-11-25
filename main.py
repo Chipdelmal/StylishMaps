@@ -1,4 +1,6 @@
 
+
+from sys import platform
 import subprocess
 from sys import argv
 import osmnx as ox
@@ -19,13 +21,16 @@ point = (float(lat), float(lon))
 ###############################################################################
 # Constants
 ###############################################################################
-(MARKER, COORDS) = (True, True)
-(FONT_FACE, FONT_SIZE, DPI) = ('Savoye LET', 250, 300)
+(MARKER, COORDS) = (False, True)
 BLDG = False
+if platform == "linux" or platform == "linux2":
+    (FONT_FACE, FONT_SIZE, DPI) = ('Gotham Light', 250, 500)
+elif platform == "darwin":
+    (FONT_FACE, FONT_SIZE, DPI) = ('Savoye LET', 250, 500)
 # label = bytes(label, "utf-8").decode("unicode_escape")'latin-1'
 label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
-# Colors
+# Label
 ###############################################################################
 degs = [fun.decdeg2dms(i) for i in point]
 degs = [[i for i in j] for j in degs]
@@ -44,7 +49,7 @@ else:
 print("* Processing {}".format(fName), end='\r')
 G = ox.graph_from_point(
     point, dist=DST, network_type='all',
-    retain_all=True, simplify=True, truncate_by_edge=False
+    retain_all=True, simplify=True, truncate_by_edge=True
 )
 if BLDG:
     gdf = ox.geometries.geometries_from_point(

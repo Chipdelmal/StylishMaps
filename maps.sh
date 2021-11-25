@@ -1,6 +1,7 @@
 #!/bin/bash
 
-PTH='/Users/sanchez.hmsc/odrive/Mega/Art/Maps/'
+# PTH='/Users/sanchez.hmsc/odrive/Mega/Art/Maps/'
+PTH='/mnt/Luma/Pictures/Art/Maps'
 ###############################################################################
 # Landmarks
 ###############################################################################
@@ -23,7 +24,7 @@ PTH='/Users/sanchez.hmsc/odrive/Mega/Art/Maps/'
 # python main.py "BellasArtes" "19.435382101596694" "-99.14121073101117" "Bellas Artes\nCDMX, MX" "12500"
 
 # python main.py "EmpireState" "40.74861929467236" "-73.98562148654035" "Empire State\nNY, US" "12500" "Modern"
-# python main.py "CentralPark" "40.78116627812904" "-73.96678501935178" "Central Park\nNY, US" "12500" "Modern"
+# python main.py "CentralPark" "40.78116627812904" "-73.96678501935178" "Central Park\nNY, US" "12500" "Old" $PTH
 
 # python main.py "Klon" "50.9428087870909" "6.95889382613002" "Kölner Dom\nKöln, DE" "10000"
 # python main.py "Brandenburg" "52.52038089732421" "13.376828705946897" "Brandenburger Tor\nBerlin, DE" "15000"
@@ -31,6 +32,9 @@ PTH='/Users/sanchez.hmsc/odrive/Mega/Art/Maps/'
 # python main.py "Alhambra" "37.193912714560234" "-3.59122591878081" "Alhambra\nGranada, ES" "10000"
 # python main.py "Budapest" "47.48807080946765" "19.05841777661642" "Nagy Vásárcsarnok\nBudapest, HU" "15000"
 # python main.py "Belvedere" "48.192824269178004" "16.38504366701092" "Schloss Belvedere\nWien, AT" "15000"
-# python main.py "GoldenGate" "37.82269102205399" "-122.47839713291208" "Golden Gate\nSan Francisco, US" "25000" "Old" $PTH
+# python main.py "GoldenGate" "37.82269102205399" "-122.47839713291208" "Golden Gate\nSan Francisco, US" "25000" "Modern" $PTH
 # python main.py "Firenze" "43.77325343869306" "11.256711217026762" "Santa Maria del Fiore\nFirenze, IT" "10000" "Modern" $PTH
 
+
+python main.py "Yami" "19.46692229722967" "-99.16704285764669" "CDMX\nYaminkling" "10000" "Modern" $PTH
+python main.py "Chip" "37.88238499954386" "-122.2620787058343" "Berkeley, California\nOctochip" "10000" "Modern" $PTH
