@@ -22,12 +22,12 @@ INKSCAPE = False
 ###############################################################################
 # Constants
 ###############################################################################
-(MARKER, COORDS) = (False, True)
+(MARKER, COORDS) = (True, True)
 BLDG = False
 if platform == "linux" or platform == "linux2":
-    (FONT_FACE, FONT_SIZE, DPI) = ('Gotham Light', 250, 500)
+    (FONT_FACE, FONT_SIZE, DPI) = ('Gotham Light', 250, 350)
 elif platform == "darwin":
-    (FONT_FACE, FONT_SIZE, DPI) = ('Savoye LET', 250, 500)
+    (FONT_FACE, FONT_SIZE, DPI) = ('Savoye LET', 250, 350)
 # label = bytes(label, "utf-8").decode("unicode_escape")'latin-1'
 label = bytes(label, 'latin-1').decode("unicode_escape")
 ###############################################################################
