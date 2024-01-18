@@ -3,6 +3,7 @@
 from sys import platform
 import subprocess
 from sys import argv
+import numpy as np
 import osmnx as ox
 from os import path
 import functions as fun
@@ -14,9 +15,11 @@ ox.config(log_console=False, use_cache=True)
     "Piso9", "7500",
     "Art", "/Users/sanchez.hmsc/Pictures/Maps"
 )
-# (lat, lon, label, fName, distance, TYPE, PATH) = (
-#     argv[2], argv[3], argv[4], argv[1], argv[5], argv[6], argv[7]
-# )
+(lat, lon, label, fName, distance, TYPE, PATH) = (
+    "18.922782", "-98.925879", "Volcanes\nLomas de Cocoyoc",
+    "Volcanes", "7500", 
+    "Art", "/Users/sanchez.hmsc/Pictures/Maps"
+)
 PATH = path.join(PATH, TYPE)
 DST = int(distance)
 point = (float(lat), float(lon))
@@ -46,10 +49,10 @@ if TYPE=='Modern':
     (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .400, 4.75, '#ffffff')
 elif TYPE=='Art':
     (bgColor, bdColor) = ('#F0E6D9', '#75393E')
-    (rdColor, rdAlpha, rdScale, txtColor) = ('#58586B', .400, 4.75, '#474139')
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#58586B', .350, 4.75, '#474139')
 else:
     (bgColor, bdColor) = ('#100F0F22', '#ffffff11')
-    (rdColor, rdAlpha, rdScale, txtColor) = ('#000000', .5, 5, '#100F0FDD')
+    (rdColor, rdAlpha, rdScale, txtColor) = ('#000000', .500, 5, '#100F0FDD')
 ###############################################################################
 # Get Network
 ###############################################################################
@@ -69,21 +72,23 @@ data = [i[-1] for i in G.edges(keys=True, data=True)]
 (roadColors, roadWidths) = ([], [])
 for item in data:
     if "length" in item.keys():
-        if item["length"] <= 100:
+        rdLen = item['length']
+        if rdLen <= 100:
             linewidth = 0.15*rdScale
-            color = fun.lighten(rdColor, .7)
-        elif item["length"] > 100 and item["length"] <= 200:
+            color = fun.lighten('#D3B1C1', 1)
+        elif rdLen > 100 and rdLen <= 200:
             linewidth = 0.25*rdScale
-            color = fun.lighten(rdColor, .775)
-        elif item["length"] > 200 and item["length"] <= 400:
+            color = fun.lighten('#CC8D6F', .9)
+        elif rdLen > 200 and rdLen <= 400:
             linewidth = 0.3*rdScale
-            color = fun.lighten(rdColor, .85)
-        elif item["length"] > 400 and item["length"] <= 800:
-            linewidth = 0.5*rdScale
-            color = fun.lighten(rdColor, 0.9)
+            color = fun.lighten('#75393E', .85)
+        elif rdLen > 400 and rdLen <= 800:
+            linewidth = 1.0*rdScale
+            color = fun.lighten('#3d405b', 0.6)
         else:
             linewidth = 0.6*rdScale
             color = fun.lighten(rdColor, 1.0)
+        linewidth = np.interp(rdLen, [0, 1000, 10000], [1.25, 4, 5])
     else:
         color = rdColor
         linewidth = 0.10
