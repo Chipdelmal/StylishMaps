@@ -48,7 +48,7 @@ if TYPE=='Modern':
     (bgColor, bdColor) = ('#100F0F22', '#ffffff11')
     (rdColor, rdAlpha, rdScale, txtColor) = ('#ffffff', .400, 4.75, '#ffffff')
 elif TYPE=='Art':
-    (bgColor, bdColor) = ('#F0E6D9', '#75393E')
+    (bgColor, bdColor) = ('#DCD4C6', '#75393E')
     (rdColor, rdAlpha, rdScale, txtColor) = ('#58586B', .350, 4.75, '#474139')
 else:
     (bgColor, bdColor) = ('#100F0F22', '#ffffff11')
@@ -75,19 +75,19 @@ for item in data:
         rdLen = item['length']
         if rdLen <= 100:
             linewidth = 0.15*rdScale
-            color = fun.lighten('#D3B1C1', 1)
+            color = fun.lighten('#8C3987', .65)
         elif rdLen > 100 and rdLen <= 200:
             linewidth = 0.25*rdScale
-            color = fun.lighten('#CC8D6F', .9)
+            color = fun.lighten('#E16C5B', .9)
         elif rdLen > 200 and rdLen <= 400:
-            linewidth = 0.3*rdScale
-            color = fun.lighten('#75393E', .85)
+            linewidth = 0.25*rdScale
+            color = fun.lighten('#2F5079', .9)
         elif rdLen > 400 and rdLen <= 800:
             linewidth = 1.0*rdScale
-            color = fun.lighten('#3d405b', 0.6)
+            color = fun.lighten('#434869', 0.9)
         else:
-            linewidth = 0.6*rdScale
-            color = fun.lighten(rdColor, 1.0)
+            linewidth = 1.0*rdScale
+            color = fun.lighten(rdColor, 1.0) 
         linewidth = np.interp(rdLen, [0, 1000, 10000], [1.25, 4, 5])
     else:
         color = rdColor
